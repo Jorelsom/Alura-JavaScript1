@@ -17,6 +17,9 @@ bAdd.addEventListener("click", function (event){
   tabela.appendChild(pacienteTr);
 
   form.reset();
+  var mensagensErro = document.querySelector("#mensagem-erro");
+  mensagensErro.innerHTML = "";
+
 });
 
 function obtemPacienteDoForm(form){   
@@ -58,12 +61,15 @@ function validaPaciente(paciente) {
 
   if (!validaPeso(paciente.peso)) erros.push("Peso é inválido");
   if (!validaAltura(paciente.altura)) erros.push("Altura é inválido");
+  if (paciente.nome.length == 0) erros.push("Necessario colocar nome do paciente");
+  if (paciente.gordura.length == 0) erros.push("Necessario colocar a taxa de gordura do paciente");
 
   return erros;
 }
 
 function exibeMensagensErro(erros){
   var ul = document.querySelector("#mensagem-erro");
+  ul.innerHTML = "";
   erros.forEach(function(erro) {
     var li = document.createElement("li");
     li.textContent = erro;
